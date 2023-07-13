@@ -1,11 +1,11 @@
 import NavBar from "./components/NavBar";
-import UsersManagementTable from "./components/UsersManagementTable";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
     <div>
       <NavBar />
-      <h1>Here goes collections</h1>
+      <HomePage />
     </div>
   );
 }

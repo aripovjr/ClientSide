@@ -1,7 +1,6 @@
 import {
   Button,
   Container,
-  Dropdown,
   Form,
   Navbar,
   OverlayTrigger,
@@ -64,7 +63,7 @@ function NavBar({ onData }) {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Navbar.Text>
-            <Link className={classes.NavbarText} to="/">
+            <Link className={classes.NavbarText} to="/home">
               <h2>Home</h2>
             </Link>
           </Navbar.Text>

@@ -21,7 +21,7 @@ function LoginPage() {
 
       if (response.status === 200) {
         // User login successful
-        navigate("/");
+        navigate("/dashboard");
       }
       const token = response.data.token;
 

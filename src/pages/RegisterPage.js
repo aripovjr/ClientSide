@@ -22,7 +22,7 @@ function RegisterPage() {
       console.log(response);
       if (response.status === 200) {
         // User registered successfully
-        navigate("/");
+        navigate("/dashboard");
       }
       const token = response.data.token;
 

@@ -1,30 +1,36 @@
-import React from "react";
-import style from "../styles/Form.module.css";
-import Button from "../components/ButtonComponent";
-import { Link } from "react-router-dom";
-import classes from "../styles/App.module.css";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 
 function HomePage() {
-  const loginHandler = () => {
-    console.log("login");
+  const [collections, setCollections] = useState([]);
+  const fetchCollections = () => {
+    axios
+      .get("http://localhost:5001/getCollections")
+      .then((response) => {
+        setCollections(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching collections:", error);
+      });
   };
-
-  const registerHandler = () => {
-    console.log("register");
-  };
+  useEffect(() => {
+    fetchCollections();
+  }, []);
 
   return (
-    <div className={classes.App}>
-      <h1 className={style.title}>Hello World, Welcome!</h1>
-      <div>
-        <Link to="/login">
-          <Button onClick={loginHandler} text="Login" />
-        </Link>
-        <Link to="/register">
-          <Button onClick={registerHandler} text="Sign Up" />
-        </Link>
-      </div>
-    </div>
+    <Container>
+      <h1> Collections</h1>
+      {collections.map((collection) => (
+        <div key={collection.id}>
+          <h4>Name: {collection.name}</h4>
+          <p>Author Name: {collection.authorName}</p>
+          <p>Author Role: {collection.authorRole}</p>
+          <p>Description: {collection.description}</p>
+          <p>Topic: {collection.topic}</p>
+        </div>
+      ))}
+    </Container>
   );
 }
 
