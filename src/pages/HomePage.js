@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import Collection from "../components/Collection";
+import NavBar from "../components/NavBar";
 
 function HomePage() {
   const [collections, setCollections] = useState([]);
@@ -20,16 +22,10 @@ function HomePage() {
 
   return (
     <Container>
-      <h1> Collections</h1>
-      {collections.map((collection) => (
-        <div key={collection.id}>
-          <h4>Name: {collection.name}</h4>
-          <p>Author Name: {collection.authorName}</p>
-          <p>Author Role: {collection.authorRole}</p>
-          <p>Description: {collection.description}</p>
-          <p>Topic: {collection.topic}</p>
-        </div>
-      ))}
+      <h1 className="text-center my-3"> Collections</h1>
+      <div>
+        <Collection collections={collections} />
+      </div>
     </Container>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Toast } from "react-bootstrap";
 import classes from "../styles/Form.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import style from "../styles/App.module.css";
@@ -19,11 +19,13 @@ function LoginPage() {
     try {
       const response = await axios.post("http://localhost:5001/login", data);
 
+      const token = response.data.token;
       if (response.status === 200) {
         // User login successful
-        navigate("/dashboard");
+        if (token) {
+          navigate("/dashboard");
+        }
       }
-      const token = response.data.token;
 
       localStorage.setItem("token", token);
     } catch (error) {

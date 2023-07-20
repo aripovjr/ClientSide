@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import CollectionForm from "../components/CollectionForm";
 import { FaExclamationCircle } from "react-icons/fa";
-import { Accordion, Alert } from "react-bootstrap";
+import { Accordion, Alert, Container } from "react-bootstrap";
 import UsersManagementTable from "../components/UsersManagementTable";
 
 function Dashboard() {
@@ -11,7 +11,7 @@ function Dashboard() {
   const handlerDataFromChild = (users) => {
     setDataFromChild(users);
   };
-
+  const token = localStorage.getItem("token");
   return (
     <div>
       <NavBar onData={handlerDataFromChild} />

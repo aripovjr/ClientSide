@@ -1,0 +1,16 @@
+.dropzone {
+  padding: 15px;
+  border: 3px dashed #3189d6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #3189d6;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.uploadIcon {
+  font-size: 70px;
+  z-index: 0;
+}

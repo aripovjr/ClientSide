@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Button, Container, Card, Col, Row } from "react-bootstrap";
 import classes from "../styles/Dashboard.module.css";
 import axios from "axios";
+import DragAndDrop from "./DragAndDrop";
+import { BiCloudUpload } from "react-icons/bi";
 
 function CollectionForm({ user }) {
   const [name, setName] = useState("");
@@ -9,21 +11,23 @@ function CollectionForm({ user }) {
   const [topic, setTopic] = useState("");
   const [isLoading, setIsloading] = useState(false);
 
+  const [files, setFiles] = useState(null);
+  const inputRef = useRef();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Create the collection object
-    const collection = {
-      name: name,
-      description: description,
-      topic: topic,
-      authorName: user.name,
-      authorRole: user.role,
-    };
+    const formData = new FormData();
+    formData.append("image", files);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("topic", topic);
+    formData.append("authorName", user.name);
+    formData.append("authorRole", user.role);
 
     // Send the collection data to the backend
     axios
-      .post("http://localhost:5001/collection", collection)
+      .post("http://localhost:5001/collection", formData)
       .then((response) => {
         console.log("Collection created:", response.data);
       })
@@ -36,6 +40,19 @@ function CollectionForm({ user }) {
     setName("");
     setDescription("");
     setTopic("");
+    setFiles(null);
+    console.log(formData);
+  };
+
+  const handlerDragOver = (event) => {
+    event.preventDefault();
+    console.log(event);
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+
+    setFiles(event.dataTransfer.files);
   };
 
   return (
@@ -73,6 +90,40 @@ function CollectionForm({ user }) {
               />
             </Form.Group>
           </Row>
+
+          {/* <Form.Group className="mb-5" controlId="formImage">
+            <Form.Label>Image</Form.Label>
+            <div>
+              {!files ? (
+                <div
+                  className={classes.dropzone}
+                  onDragOver={handlerDragOver}
+                  onDrop={handleDrop}
+                >
+                  <p>Drag and Drop image to Upload</p>
+                  <input
+                    type="file"
+                    multiple
+                    onChange={(event) => setFiles(event.target.files)}
+                    hidden
+                    ref={inputRef}
+                  />
+                  <BiCloudUpload className={classes.uploadIcon} />
+                  <Button onClick={() => inputRef.current.click()}>
+                    Select Image
+                  </Button>
+                </div>
+              ) : (
+                <div className={classes.dropzone}>
+                  <ul>
+                    {Array.from(files).map((file, idx) => (
+                      <li key={idx}>{file.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </Form.Group> */}
 
           <Form.Group className="mb-3" controlId="formDescription">
             <Form.Label>Description</Form.Label>
