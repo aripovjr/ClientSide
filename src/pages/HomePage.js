@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import Collection from "../components/Collection";
-import NavBar from "../components/NavBar";
 
 function HomePage() {
   const [collections, setCollections] = useState([]);

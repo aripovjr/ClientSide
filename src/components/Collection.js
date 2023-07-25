@@ -4,9 +4,9 @@ import classes from "../styles/CollectionCard.module.css";
 
 function Collection({ collections }) {
   return (
-    <Container className="d-flex flex-wrap justify-content-between ">
-      {collections.map((item) => (
-        <Card style={{ width: "300px", margin: "9px" }}>
+    <Container className="d-flex flex-wrap  ">
+      {collections.map((item, id) => (
+        <Card key={id} style={{ width: "290px", margin: "7px" }}>
           <Card.Body>
             <Card.Title>{item.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">

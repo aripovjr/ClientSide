@@ -11,6 +11,7 @@ function Dashboard() {
   const handlerDataFromChild = (users) => {
     setDataFromChild(users);
   };
+  console.log(dataFromChild);
   const token = localStorage.getItem("token");
   return (
     <div>
